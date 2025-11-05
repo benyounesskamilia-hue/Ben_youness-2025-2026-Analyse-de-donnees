@@ -8,5 +8,7 @@ with open("./data/resultats-elections-presidentielles-2022-1er-tour.csv","r") as
     contenu = pd.read_csv(fichier)
 
 # Mettre dans un commentaire le numéro de la question
-# Question 1
-# ...
+# Question 4
+voir ligne 6 à 8
+
+# Question 5
