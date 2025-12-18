@@ -12,3 +12,4 @@ with open("./data/resultats-elections-presidentielles-2022-1er-tour.csv","r") as
 voir ligne 6 à 8
 
 # Question 5
+
