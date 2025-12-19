@@ -100,3 +100,21 @@ for modalite in echantillon.index:
 #La décision se base sur la notion de risques alpha et bêta.
 #Comme à la séance précédente, l'ensemble des tests se trouve au lien : https://docs.scipy.org/doc/scipy/reference/stats.html
 print("Théorie de la décision")
+
+# =========================
+# THÉORIE DE LA DÉCISION
+# =========================
+
+# Test de normalité sur la variable "Pour"
+stat, p_value = scipy.stats.shapiro(donnees["Pour"])
+
+print("\nTest de Shapiro-Wilk (variable 'Pour') :")
+print("Statistique :", stat)
+print("p-value :", p_value)
+
+alpha = 0.05
+
+if p_value > alpha:
+    print("On ne rejette pas l'hypothèse H0 : la distribution est compatible avec une loi normale.")
+else:
+    print("On rejette l'hypothèse H0 : la distribution n'est pas normale.")
