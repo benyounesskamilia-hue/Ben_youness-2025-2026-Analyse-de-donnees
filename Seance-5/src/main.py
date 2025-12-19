@@ -73,6 +73,29 @@ for modalite in frequences_echantillon.index:
 #L'estimation se base sur l'effectif.
 print("Résultat sur le calcul d'un intervalle de confiance")
 
+# =========================
+# THÉORIE DE L'ESTIMATION
+# =========================
+
+# On choisit un seul échantillon (le premier)
+echantillon = donnees.iloc[0]
+
+print("\nÉchantillon étudié :")
+print(echantillon)
+
+# Effectif de l'échantillon
+n_ech = echantillon.sum()
+
+print("\nIntervalle de confiance à 95 % :")
+
+for modalite in echantillon.index:
+    f = echantillon[modalite] / n_ech
+    marge = z * math.sqrt((f * (1 - f)) / n_ech)
+    borne_inf = f - marge
+    borne_sup = f + marge
+
+    print(modalite, ":", round(borne_inf, 3), ";", round(borne_sup, 3))
+
 #Théorie de la décision (tests d'hypothèse)
 #La décision se base sur la notion de risques alpha et bêta.
 #Comme à la séance précédente, l'ensemble des tests se trouve au lien : https://docs.scipy.org/doc/scipy/reference/stats.html
