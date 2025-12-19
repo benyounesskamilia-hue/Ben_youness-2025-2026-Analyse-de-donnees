@@ -21,6 +21,54 @@ print("Résultat sur le calcul d'un intervalle de fluctuation")
 
 donnees = pd.DataFrame(ouvrirUnFichier("./data/Echantillonnage-100-Echantillons.csv"))
 
+# =========================
+# THÉORIE DE L'ÉCHANTILLONNAGE
+# =========================
+
+# Calcul des moyennes par modalité
+moyennes = donnees.mean()
+print("\nMoyennes des 100 échantillons :")
+print(moyennes)
+
+# Arrondi à 0 décimale (comme demandé)
+moyennes_arrondies = moyennes.round(0)
+
+# Somme des moyennes
+effectif_total = moyennes_arrondies.sum()
+
+# Fréquences issues de l'échantillonnage
+frequences_echantillon = moyennes_arrondies / effectif_total
+print("\nFréquences issues des échantillons :")
+print(frequences_echantillon)
+
+# Fréquences de la population mère (données de l'énoncé)
+population = {
+    "Pour": 852,
+    "Contre": 911,
+    "Sans opinion": 422
+}
+
+population = pd.Series(population)
+frequences_population = population / population.sum()
+
+print("\nFréquences de la population mère :")
+print(frequences_population)
+
+# Calcul des intervalles de fluctuation à 95 %
+z = 1.96
+n = effectif_total
+
+print("\nIntervalles de fluctuation à 95 % :")
+
+for modalite in frequences_echantillon.index:
+    f = frequences_echantillon[modalite]
+    marge = z * math.sqrt((f * (1 - f)) / n)
+    borne_inf = f - marge
+    borne_sup = f + marge
+
+    print(modalite, ":", round(borne_inf, 3), ";", round(borne_sup, 3))
+
+
 #Théorie de l'estimation (intervalles de confiance)
 #L'estimation se base sur l'effectif.
 print("Résultat sur le calcul d'un intervalle de confiance")
